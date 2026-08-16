@@ -1,0 +1,11 @@
+{
+  "name": "Seattle Community Watch",
+  "description": "An application that uses configurable AI models to search for and display recent crime reports and good deeds in Seattle in real-time by leveraging Google Search grounding.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
