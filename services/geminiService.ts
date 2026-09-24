@@ -18,6 +18,28 @@ export async function searchForIncidents(
     settings = modelIdOrSettings;
   }
 
+  // The connected Emerald workspace provides a source-backed, key-free
+  // report. Explicitly configured model credentials still use the original
+  // Civic Lens model-provider workflow below.
+  if (!settings.apiKey?.trim() && !settings.baseUrl?.trim()) {
+    const response = await fetch('/api/civic-lens/report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query,
+        category,
+        mode,
+        searchArea,
+        imageBlob,
+        targetLanguage,
+      }),
+    });
+    const payload = await response.json();
+    if (!response.ok)
+      throw new Error(payload.error || 'Civic sources are unavailable.');
+    return payload;
+  }
+
   return searchForIncidentsWithAI(
     query,
     category,
@@ -30,4 +52,3 @@ export async function searchForIncidents(
 }
 
 export { searchForIncidentsWithAI };
-
