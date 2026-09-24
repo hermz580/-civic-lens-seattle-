@@ -120,7 +120,7 @@ async function searchWithOpenAICompatible(
   imageBlob?: string,
   targetLanguage: Language = 'English',
   modelId: string = 'gpt-4o',
-  settings: AISettings
+  settings: AISettings = DEFAULT_AI_SETTINGS
 ): Promise<SearchResult> {
   let baseUrl = settings.baseUrl?.trim();
   if (!baseUrl) {
